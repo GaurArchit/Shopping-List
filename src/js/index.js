@@ -76,7 +76,7 @@ completedDiv.addEventListener("dragover", function (evt) {
   evt.preventDefault();
 });
 // function sayHi() {
-//   console.log("Hi there!");
+//   console.log("Higit  there!");
 // }
 
 // const roger = document.querySelector(".remove-btn");
