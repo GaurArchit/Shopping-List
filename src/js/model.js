@@ -1,3 +1,4 @@
+import { getFromStore, saveToStore } from "./storage.js";
 let shoppingList = [];
 let completedList = [];
 
@@ -11,6 +12,8 @@ export const addToshoppingList = (item) => {
     item: item,
     priority: "normal",
   });
+
+  saveToStore({ shoppingList, completedList });
 };
 
 export const setPriority = (itemid, priority) => {
@@ -22,6 +25,7 @@ export const setPriority = (itemid, priority) => {
       };
     }
   });
+  saveToStore({ shoppingList, completedList });
 };
 
 export const removeItem = (itemId) => {
@@ -29,6 +33,7 @@ export const removeItem = (itemId) => {
   if (confirm) {
     shoppingList = shoppingList.filter(({ id }) => id !== itemId);
     return true;
+    saveToStore({ shoppingList, completedList });
   }
   return false;
 };
@@ -37,6 +42,13 @@ export const addtoCompletedList = (itemId) => {
   const getItem = shoppingList.find(({ id }) => id === itemId);
   shoppingList = shoppingList.filter(({ id }) => id !== itemId);
   completedList = [getItem, ...completedList];
+  saveToStore({ shoppingList, completedList });
 };
 export const getShoppingList = () => shoppingList;
 export const getCompletedList = () => completedList;
+
+export const bootup = () => {
+  const { active, completed } = getFromStore();
+  shoppingList = active;
+  completedList = completed;
+};

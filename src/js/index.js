@@ -5,6 +5,7 @@ import {
   setPriority,
   removeItem,
   addtoCompletedList,
+  bootup,
 } from "./model.js";
 import { renderShoppingList, renderCompleteList } from "./view.js";
 
@@ -75,6 +76,12 @@ completedDiv.addEventListener("drop", function (evt) {
 completedDiv.addEventListener("dragover", function (evt) {
   evt.preventDefault();
 });
+//Immediately Invoked function Expression
+(() => {
+  bootup();
+  renderShoppingList();
+  renderCompleteList();
+})();
 // function sayHi() {
 //   console.log("Higit  there!");
 // }
